@@ -1,0 +1,98 @@
+{
+  "scenarios": [
+    {
+      "scenario": "smoke_report",
+      "severity_expected": "high",
+      "severity_actual": "high",
+      "extraction_success": true,
+      "evidence_grounded": true,
+      "unsupported_claims": 0,
+      "task_complete": true,
+      "latency_ms": 0.4749590007122606,
+      "peak_traced_bytes": 13925
+    },
+    {
+      "scenario": "pressure_document",
+      "severity_expected": "medium",
+      "severity_actual": "medium",
+      "extraction_success": true,
+      "evidence_grounded": true,
+      "unsupported_claims": 0,
+      "task_complete": true,
+      "latency_ms": 0.05062499985797331,
+      "peak_traced_bytes": 3170
+    },
+    {
+      "scenario": "green_image_only",
+      "severity_expected": "undetermined",
+      "severity_actual": "undetermined",
+      "extraction_success": true,
+      "evidence_grounded": true,
+      "unsupported_claims": 0,
+      "task_complete": true,
+      "latency_ms": 0.10704200030886568,
+      "peak_traced_bytes": 2162
+    },
+    {
+      "scenario": "routine_report",
+      "severity_expected": "undetermined",
+      "severity_actual": "undetermined",
+      "extraction_success": true,
+      "evidence_grounded": true,
+      "unsupported_claims": 0,
+      "task_complete": true,
+      "latency_ms": 0.014707999071106315,
+      "peak_traced_bytes": 1374
+    },
+    {
+      "scenario": "leak_report",
+      "severity_expected": "medium",
+      "severity_actual": "medium",
+      "extraction_success": true,
+      "evidence_grounded": true,
+      "unsupported_claims": 0,
+      "task_complete": true,
+      "latency_ms": 0.1009579991659848,
+      "peak_traced_bytes": 2464
+    }
+  ],
+  "failure_tests": [
+    {
+      "case": "corrupt_image",
+      "rejected_as_expected": true
+    },
+    {
+      "case": "missing_document_name",
+      "rejected_as_expected": true
+    },
+    {
+      "case": "unsupported_document",
+      "rejected_as_expected": true
+    }
+  ],
+  "performance_by_size": [
+    {
+      "image_side_pixels": 2,
+      "latency_ms": 0.12324999988777563,
+      "peak_traced_bytes": 2282
+    },
+    {
+      "image_side_pixels": 20,
+      "latency_ms": 1.6132919990923256,
+      "peak_traced_bytes": 69273
+    },
+    {
+      "image_side_pixels": 100,
+      "latency_ms": 46.710291999261244,
+      "peak_traced_bytes": 1710733
+    }
+  ],
+  "summary": {
+    "severity_accuracy": 1.0,
+    "extraction_accuracy": 1.0,
+    "evidence_grounding_rate": 1.0,
+    "unsupported_claim_count": 0,
+    "task_completion_rate": 1.0,
+    "expected_failure_rejection_rate": 1.0
+  }
+}

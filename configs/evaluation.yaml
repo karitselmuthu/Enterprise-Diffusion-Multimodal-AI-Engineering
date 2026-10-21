@@ -1,0 +1,4 @@
+seed: 7
+held_out_fraction: 0.25
+generation_length: 8
+generation_steps: [1, 2, 4, 8]

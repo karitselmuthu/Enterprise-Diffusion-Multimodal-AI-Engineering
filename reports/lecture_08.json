@@ -1,0 +1,103 @@
+{
+  "dataset": {
+    "train": 96,
+    "held_out": 32,
+    "seed": 7
+  },
+  "masked_reconstruction_accuracy": 0.6176470588235294,
+  "token_error_rate": 0.38235294117647056,
+  "masked_cross_entropy_nats": 0.9351920689821085,
+  "training_loss_first_last": [
+    1.4765983797201292,
+    0.9133281701366008
+  ],
+  "diffusion": {
+    "result": {
+      "tokens": [
+        "the",
+        "valve",
+        "in",
+        "north",
+        "reports",
+        "high",
+        "temperature",
+        "pressure"
+      ],
+      "text": "the valve in north reports high temperature pressure",
+      "steps_used": 4,
+      "trace": [
+        [
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]"
+        ],
+        [
+          "the",
+          "[MASK]",
+          "in",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]"
+        ],
+        [
+          "the",
+          "valve",
+          "in",
+          "[MASK]",
+          "reports",
+          "[MASK]",
+          "[MASK]",
+          "[MASK]"
+        ],
+        [
+          "the",
+          "valve",
+          "in",
+          "north",
+          "reports",
+          "high",
+          "[MASK]",
+          "[MASK]"
+        ],
+        [
+          "the",
+          "valve",
+          "in",
+          "north",
+          "reports",
+          "high",
+          "temperature",
+          "pressure"
+        ]
+      ]
+    },
+    "latency_ms": 1.2367500003165333,
+    "peak_traced_bytes": 7542
+  },
+  "autoregressive": {
+    "result": {
+      "tokens": [
+        "the",
+        "motor",
+        "in",
+        "east",
+        "reports",
+        "high",
+        "flow",
+        "pump"
+      ],
+      "text": "the motor in east reports high flow pump",
+      "steps_used": 8
+    },
+    "latency_ms": 0.08937500024330802,
+    "peak_traced_bytes": 4456
+  },
+  "comparison_note": "Reconstruction accuracy applies only to the masked model. Generated text is illustrative; no claim of semantic quality equivalence is made. Python traced memory excludes native allocations."
+}

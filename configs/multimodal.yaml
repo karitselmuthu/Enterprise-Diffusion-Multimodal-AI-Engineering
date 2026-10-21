@@ -1,0 +1,5 @@
+backend: mock
+max_image_bytes: 5000000
+max_document_bytes: 5000000
+ocr: optional
+local_model_path: null
