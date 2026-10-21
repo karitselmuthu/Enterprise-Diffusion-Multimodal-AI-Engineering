@@ -1,0 +1,100 @@
+{
+  "repeated": [
+    {
+      "status": 200,
+      "latency_ms": 337.68420799970045
+    },
+    {
+      "status": 200,
+      "latency_ms": 302.39008399985323
+    },
+    {
+      "status": 200,
+      "latency_ms": 305.9494999997696
+    },
+    {
+      "status": 200,
+      "latency_ms": 260.61770799969963
+    },
+    {
+      "status": 200,
+      "latency_ms": 253.00925000010466
+    },
+    {
+      "status": 200,
+      "latency_ms": 282.80145899952913
+    },
+    {
+      "status": 200,
+      "latency_ms": 263.46516699959466
+    },
+    {
+      "status": 200,
+      "latency_ms": 261.2507920002827
+    },
+    {
+      "status": 200,
+      "latency_ms": 331.4215000009426
+    },
+    {
+      "status": 200,
+      "latency_ms": 288.04745900015405
+    }
+  ],
+  "concurrent": [
+    {
+      "status": 200,
+      "latency_ms": 6726.537541999278
+    },
+    {
+      "status": 200,
+      "latency_ms": 6904.959542000142
+    },
+    {
+      "status": 200,
+      "latency_ms": 6717.184875000385
+    },
+    {
+      "status": 200,
+      "latency_ms": 6713.432333999663
+    }
+  ],
+  "larger": {
+    "status": 200,
+    "latency_ms": 2104.606500000955
+  },
+  "oversized": {
+    "status": 422,
+    "latency_ms": 13.081875000352738
+  },
+  "malformed": {
+    "status": 422,
+    "latency_ms": 9.420209000381874
+  },
+  "client_timeout_observed": true,
+  "recovery": {
+    "status": 200,
+    "latency_ms": 1013.8200410001446
+  },
+  "image_sizes": [
+    [
+      900,
+      500
+    ],
+    [
+      1800,
+      1000
+    ],
+    [
+      2250,
+      1250
+    ],
+    [
+      2700,
+      1500
+    ]
+  ],
+  "server_rss_before_bytes": 59326464,
+  "server_rss_after_bytes": 366870528,
+  "note": "Mock backend only; OS RSS snapshots are process-level, not request peaks. A client timeout does not cancel server computation. VLM timeouts are not tested."
+}

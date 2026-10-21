@@ -24,3 +24,15 @@
 {"id":"pdf_leak","report":"Operator inspection pending.","document":"valve_report.pdf","expected_severity":"medium","expected_sources":["report_text","document_text"],"category":"document"}
 {"id":"text_document","report":"Operator check.","document":"../samples/incident_note.txt","expected_severity":"medium","expected_sources":["report_text","document_text"],"category":"document"}
 {"id":"network_dashboard","report":"","image":"network_dashboard.png","expected_severity":"undetermined","expected_sources":["image_pixels"],"category":"visual_only"}
+{"id":"critical_yesterday_resolved_now","report":"The rack was critical yesterday but is resolved now.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_resolved"}
+{"id":"smoke_yesterday","report":"Smoke was detected yesterday during the drill.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_historical"}
+{"id":"fire_prior","report":"A prior fire incident is recorded for this room.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_historical"}
+{"id":"leak_resolved_now","report":"A leak was found earlier but the valve is fixed now.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_resolved"}
+{"id":"alarm_recurred","report":"The alarm was cleared yesterday. Alarm active again today.","expected_severity":"medium","expected_sources":["report_text"],"category":"temporal_recurring"}
+{"id":"smoke_recurred","report":"Smoke was resolved yesterday. Smoke detected again now.","expected_severity":"high","expected_sources":["report_text"],"category":"temporal_recurring"}
+{"id":"critical_still_active","report":"Critical warning is still active after repair.","expected_severity":"high","expected_sources":["report_text"],"category":"temporal_active"}
+{"id":"pressure_current","report":"Pressure remains high currently.","expected_severity":"medium","expected_sources":["report_text"],"category":"temporal_active"}
+{"id":"clock_resolved_later","report":"At 09:00 smoke was detected. At 10:30 the smoke was cleared.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_clock"}
+{"id":"clock_active_later","report":"At 10:30 the alarm was cleared. At 11:05 alarm active again.","expected_severity":"medium","expected_sources":["report_text"],"category":"temporal_clock"}
+{"id":"clock_out_of_order","report":"At 11:00 fire was resolved. At 09:00 fire was active.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"temporal_clock"}
+{"id":"clock_reopened_out_of_order","report":"At 11:00 leak recurred. At 09:00 the leak was fixed.","expected_severity":"medium","expected_sources":["report_text"],"category":"temporal_clock"}

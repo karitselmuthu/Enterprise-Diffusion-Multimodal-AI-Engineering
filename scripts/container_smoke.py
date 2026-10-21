@@ -12,9 +12,11 @@ from urllib.request import Request, urlopen
 BASE = "http://127.0.0.1:8000"
 
 
-def call(path: str, payload: dict | None = None) -> tuple[int, dict]:
+def call(path: str, payload: dict | None = None, *, reviewer: bool = False) -> tuple[int, dict]:
     data = json.dumps(payload).encode() if payload is not None else None
     headers = {"X-Review-Key": os.environ["REVIEW_API_KEY"]}
+    if reviewer:
+        headers["X-Reviewer-Key"] = os.environ["REVIEWER_SMOKE_KEY"]
     if data is not None:
         headers["Content-Type"] = "application/json"
     request = Request(BASE + path, data=data, headers=headers, method="POST" if data else "GET")
@@ -40,9 +42,9 @@ def main() -> None:
     decision = {"status": "approved", "reviewer": "container-smoke", "summary": "Smoke reported",
                 "recommendation": "Verify the site alert", "cited_sources": ["report_text"]}
     decision_path = f"/reviews/{incident['id']}/decision"
-    approved_status, approved = call(decision_path, decision)
+    approved_status, approved = call(decision_path, decision, reviewer=True)
     assert approved_status == 200 and approved["status"] == "approved"
-    duplicate_status, _ = call(decision_path, decision)
+    duplicate_status, _ = call(decision_path, decision, reviewer=True)
     assert duplicate_status == 409
     print(json.dumps({"health": health["status"], "review": approved["status"],
                       "duplicate_decision_status": duplicate_status}))

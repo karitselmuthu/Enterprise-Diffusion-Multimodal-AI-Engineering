@@ -34,9 +34,10 @@ class ApiTests(unittest.TestCase):
     def test_review_auth_persistence_and_single_decision(self):
         with patch.dict(os.environ, {"REVIEW_API_KEY": ""}):
             self.assertEqual(self.client.get("/reviews").status_code, 503)
-        with tempfile.TemporaryDirectory() as folder, patch.dict(os.environ, {"REVIEW_API_KEY": "test-key", "REVIEW_DB_PATH": str(Path(folder) / "reviews.sqlite3")}):
+        with tempfile.TemporaryDirectory() as folder, patch.dict(os.environ, {"REVIEW_API_KEY": "test-key", "REVIEWER_KEYS_JSON": '{"analyst":"analyst-key"}', "REVIEW_DB_PATH": str(Path(folder) / "reviews.sqlite3")}):
             self.assertEqual(self.client.get("/reviews").status_code, 401)
             headers = {"X-Review-Key": "test-key"}
+            reviewer_headers = {**headers, "X-Reviewer-Key": "analyst-key"}
             created = self.client.post("/reviews", json={"text": "Smoke in server room"}, headers=headers)
             self.assertEqual(created.status_code, 201)
             record = created.json()
@@ -45,13 +46,24 @@ class ApiTests(unittest.TestCase):
             invalid = self.client.post(f"/reviews/{record['id']}/decision", headers=headers,
                                        json={"status": "approved", "reviewer": "analyst", "summary": "Smoke reported",
                                              "recommendation": "Inspect", "cited_sources": ["unknown"]})
-            self.assertEqual(invalid.status_code, 422)
+            self.assertEqual(invalid.status_code, 401)
             decision = {"status": "approved", "reviewer": "analyst", "summary": "Smoke reported",
                         "recommendation": "Inspect the room", "cited_sources": ["report_text"]}
-            approved = self.client.post(f"/reviews/{record['id']}/decision", headers=headers, json=decision)
+            with patch.dict(os.environ, {"REVIEWER_KEYS_JSON": ""}):
+                self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json=decision).status_code, 503)
+            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers={**headers, "X-Reviewer-Key": "wrong"}, json=decision).status_code, 401)
+            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json={**decision, "reviewer": "someone-else"}).status_code, 403)
+            self.assertEqual(self.client.post("/reviews/not-a-valid-id/decision", headers=reviewer_headers, json=decision).status_code, 404)
+            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers,
+                                              json={**decision, "cited_sources": ["unknown"]}).status_code, 422)
+            approved = self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json=decision)
             self.assertEqual(approved.status_code, 200)
             self.assertEqual(approved.json()["status"], "approved")
-            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=headers, json=decision).status_code, 409)
+            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json=decision).status_code, 409)
+            rejected = self.client.post("/reviews", json={"text": "Check rack"}, headers=headers).json()
+            reject_body = {"status": "rejected", "reviewer": "analyst", "summary": "Insufficient evidence", "cited_sources": []}
+            self.assertEqual(self.client.post(f"/reviews/{rejected['id']}/decision", headers=reviewer_headers, json=reject_body).json()["status"], "rejected")
+            self.assertEqual(self.client.post(f"/reviews/{rejected['id']}/decision", headers=reviewer_headers, json=decision).status_code, 409)
 
 
 if __name__ == "__main__":

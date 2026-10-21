@@ -64,3 +64,25 @@ class BigramBaseline:
             probabilities = self.probabilities(tokens[-1] if tokens else "<START>")
             tokens.append(rng.choices(list(probabilities), weights=list(probabilities.values()))[0])
         return {"tokens": tokens, "text": " ".join(tokens), "steps_used": len(tokens) - len(prefix or [])}
+
+
+def reconstruct_iterative(model: TinyDenoiser, masked: list[str], *, steps: int, seed: int = 0) -> dict:
+    """Fill an existing mask, committing the most confident positions each round."""
+    if steps < 1:
+        raise ValueError("steps must be positive")
+    tokens = list(masked)
+    rng = random.Random(seed)
+    trace = [list(tokens)]
+    for step in range(steps):
+        positions = [i for i, token in enumerate(tokens) if token == MASK]
+        if not positions:
+            break
+        candidates = []
+        for position in positions:
+            probabilities = model.probabilities(tokens, position)
+            prediction = max(probabilities, key=probabilities.get)
+            candidates.append((probabilities[prediction], rng.random(), position, prediction))
+        for _, _, position, prediction in sorted(candidates, reverse=True)[:positions_this_step(len(positions), steps - step)]:
+            tokens[position] = prediction
+        trace.append(list(tokens))
+    return {"tokens": tokens, "steps_used": len(trace) - 1, "trace": trace}

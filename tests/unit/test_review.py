@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from src.review.store import ReviewStore
@@ -22,6 +23,22 @@ class ReviewStoreTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 first.decide(record["id"], status="rejected", reviewer="analyst-2", summary="No evidence",
                              recommendation="", cited_sources=[])
+
+    def test_simultaneous_decisions_allow_one_winner(self):
+        with tempfile.TemporaryDirectory() as folder:
+            store = ReviewStore(Path(folder) / "reviews.sqlite3")
+            record = store.create({"evidence": [{"source": "report_text", "content": "Alarm"}]})
+            def decide(index):
+                try:
+                    store.decide(record["id"], status="approved", reviewer=f"analyst-{index}",
+                                 summary="Alarm reported", recommendation="Inspect", cited_sources=["report_text"])
+                    return "approved"
+                except RuntimeError:
+                    return "conflict"
+            with ThreadPoolExecutor(max_workers=2) as executor:
+                outcomes = list(executor.map(decide, range(2)))
+            self.assertCountEqual(outcomes, ["approved", "conflict"])
+            self.assertEqual(store.get(record["id"])["status"], "approved")
 
 
 if __name__ == "__main__":

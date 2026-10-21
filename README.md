@@ -50,6 +50,8 @@ python -m cli.main benchmark --output reports/lecture_08.json
 
 The benchmark uses 96 synthetic training sentences and 32 held-out combinations. It records masked reconstruction accuracy, token error rate, cross entropy, generated samples, latency, Python traced peak memory, and actual generation iterations. See [Lecture 8 notes](docs/lecture_08.md) and the generated [report](reports/lecture_08.json).
 
+Run `python experiments/lecture_08/07_masked_baseline_sweep.py` for a paired reconstruction comparison with a position-frequency masked baseline across three masking ratios, four reverse iteration counts, and three seeds. Results are in [the sweep report](reports/lecture_08_sweep.json).
+
 API endpoints: `POST /diffusion/mask`, `POST /diffusion/generate`, `POST /diffusion/baseline`, and `GET /diffusion/benchmark`.
 
 ## Lecture 9 — Multimodal AI
@@ -67,9 +69,11 @@ The reproducible small-model lab downloads the [SmolVLM-256M-Instruct](https://h
   --model-path data/models/smolvlm-256m-instruct
 ```
 
-The 26-case synthetic incident dataset is in `data/evaluation/incidents.jsonl`. The default benchmark records each mismatch and evaluates source extraction, evidence links, error handling, and input-size performance. Model descriptions are kept as **unverified observations**; they do not set incident severity automatically.
+The 38-case synthetic incident dataset is in `data/evaluation/incidents.jsonl`. The default benchmark records each mismatch and evaluates source extraction, evidence links, error handling, and input-size performance. It includes historical, resolved, recurring, active, and conflicting clock-time reports. Model descriptions are kept as **unverified observations**; they do not set incident severity automatically.
 
 On the verified CPU lab run, the optional model recognized the target status word in 3 of 4 synthetic dashboards and took about 105–109 seconds per image. See the [VLM report](reports/lecture_09_vlm.json). It is too slow for a responsive API on this machine without a faster runtime or smaller workload.
+
+`python scripts/generate_dashboard_matrix.py` creates 24 varied dashboard fixtures. `python experiments/lecture_09/07_dashboard_matrix.py --model-path data/models/smolvlm-256m-instruct` measures exact status and numeric reading extraction. `python scripts/reliability_lab.py` exercises a running mock API under repeated and concurrent requests and records server resident memory. These experiments use synthetic images; their labels do not count as independent human ground truth.
 
 `POST /multimodal/analyze` accepts JSON with `text`, optional base64 `image_base64`, optional base64 `document_base64` plus `document_name`, and optional `backend`. For `backend: "local"`, set `LOCAL_VLM_MODEL_PATH` on the server. Example:
 
@@ -83,6 +87,10 @@ The scenario report measures severity accuracy, extraction success, evidence gro
 
 ### Human review
 
-Set `REVIEW_API_KEY` before starting the API to enable the review queue. `POST /reviews` analyzes and stores a pending incident, `GET /reviews` lists the queue, and `POST /reviews/{id}/decision` records one approved or rejected decision. Approval requires a reviewer summary, recommendation, and cited evidence source. The [review lab](scripts/review_lab.py) offers an interactive terminal workflow using the same API key. Review records are stored in `data/reviews.sqlite3`; set `REVIEW_DB_PATH` to change the location. Mount that path as a volume when using Docker. The shared key is a lab control, not individual user authentication.
+Set `REVIEW_API_KEY` before starting the API to enable the review queue. Set `REVIEWER_KEYS_JSON` to a mapping of reviewer IDs to individual keys before recording decisions. `POST /reviews` analyzes and stores a pending incident, `GET /reviews` lists the queue, and `POST /reviews/{id}/decision` records one approved or rejected decision using a matching `X-Reviewer-Key`. Approval requires a reviewer summary, recommendation, and cited evidence source. The [review lab](scripts/review_lab.py) offers an interactive terminal workflow; set `REVIEWER_KEY` for its decision step. Review records are stored in `data/reviews.sqlite3`; set `REVIEW_DB_PATH` to change the location. Mount that path as a volume when using Docker. These static keys are a lab control, not managed user authentication.
+
+`python scripts/human_ground_truth.py --export /path/to/review_packets` creates source packets and two empty reviewer sheets. After two different reviewers label severity and check claim support against the original images and documents, run `python scripts/human_ground_truth.py --score reviewer_a.csv reviewer_b.csv` to measure agreement. No independent labels are supplied with this repository.
+
+After the 24-image VLM run completes, `python scripts/human_ground_truth.py --export-vlm /path/to/review_packets` prepares every model answer alongside its source image for two independent support judgments. Use `--score-vlm vlm_reviewer_a.csv vlm_reviewer_b.csv` after review.
 
 See the [review workflow](docs/review_workflow.md) for an example decision and the limits of this lab control.

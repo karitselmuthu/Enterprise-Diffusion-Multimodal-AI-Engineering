@@ -1,0 +1,297 @@
+{
+  "dataset": {
+    "train": 96,
+    "held_out": 32
+  },
+  "rows": [
+    {
+      "mask_ratio": 0.15,
+      "seed": 7,
+      "reverse_steps": 1,
+      "masked_tokens": 55,
+      "denoiser_accuracy": 0.6545454545454545,
+      "position_baseline_accuracy": 0.5272727272727272
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 7,
+      "reverse_steps": 2,
+      "masked_tokens": 55,
+      "denoiser_accuracy": 0.6,
+      "position_baseline_accuracy": 0.5272727272727272
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 7,
+      "reverse_steps": 4,
+      "masked_tokens": 55,
+      "denoiser_accuracy": 0.6,
+      "position_baseline_accuracy": 0.5272727272727272
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 7,
+      "reverse_steps": 8,
+      "masked_tokens": 55,
+      "denoiser_accuracy": 0.6,
+      "position_baseline_accuracy": 0.5272727272727272
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 17,
+      "reverse_steps": 1,
+      "masked_tokens": 43,
+      "denoiser_accuracy": 0.5116279069767442,
+      "position_baseline_accuracy": 0.46511627906976744
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 17,
+      "reverse_steps": 2,
+      "masked_tokens": 43,
+      "denoiser_accuracy": 0.5116279069767442,
+      "position_baseline_accuracy": 0.46511627906976744
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 17,
+      "reverse_steps": 4,
+      "masked_tokens": 43,
+      "denoiser_accuracy": 0.5116279069767442,
+      "position_baseline_accuracy": 0.46511627906976744
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 17,
+      "reverse_steps": 8,
+      "masked_tokens": 43,
+      "denoiser_accuracy": 0.5116279069767442,
+      "position_baseline_accuracy": 0.46511627906976744
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 27,
+      "reverse_steps": 1,
+      "masked_tokens": 39,
+      "denoiser_accuracy": 0.717948717948718,
+      "position_baseline_accuracy": 0.6153846153846154
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 27,
+      "reverse_steps": 2,
+      "masked_tokens": 39,
+      "denoiser_accuracy": 0.717948717948718,
+      "position_baseline_accuracy": 0.6153846153846154
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 27,
+      "reverse_steps": 4,
+      "masked_tokens": 39,
+      "denoiser_accuracy": 0.717948717948718,
+      "position_baseline_accuracy": 0.6153846153846154
+    },
+    {
+      "mask_ratio": 0.15,
+      "seed": 27,
+      "reverse_steps": 8,
+      "masked_tokens": 39,
+      "denoiser_accuracy": 0.717948717948718,
+      "position_baseline_accuracy": 0.6153846153846154
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 7,
+      "reverse_steps": 1,
+      "masked_tokens": 102,
+      "denoiser_accuracy": 0.6176470588235294,
+      "position_baseline_accuracy": 0.6176470588235294
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 7,
+      "reverse_steps": 2,
+      "masked_tokens": 102,
+      "denoiser_accuracy": 0.6372549019607843,
+      "position_baseline_accuracy": 0.6176470588235294
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 7,
+      "reverse_steps": 4,
+      "masked_tokens": 102,
+      "denoiser_accuracy": 0.6470588235294118,
+      "position_baseline_accuracy": 0.6176470588235294
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 7,
+      "reverse_steps": 8,
+      "masked_tokens": 102,
+      "denoiser_accuracy": 0.6470588235294118,
+      "position_baseline_accuracy": 0.6176470588235294
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 17,
+      "reverse_steps": 1,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.5795454545454546,
+      "position_baseline_accuracy": 0.6136363636363636
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 17,
+      "reverse_steps": 2,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.6363636363636364,
+      "position_baseline_accuracy": 0.6136363636363636
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 17,
+      "reverse_steps": 4,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.6477272727272727,
+      "position_baseline_accuracy": 0.6136363636363636
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 17,
+      "reverse_steps": 8,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.6477272727272727,
+      "position_baseline_accuracy": 0.6136363636363636
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 27,
+      "reverse_steps": 1,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.625,
+      "position_baseline_accuracy": 0.5681818181818182
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 27,
+      "reverse_steps": 2,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.5909090909090909,
+      "position_baseline_accuracy": 0.5681818181818182
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 27,
+      "reverse_steps": 4,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.5909090909090909,
+      "position_baseline_accuracy": 0.5681818181818182
+    },
+    {
+      "mask_ratio": 0.4,
+      "seed": 27,
+      "reverse_steps": 8,
+      "masked_tokens": 88,
+      "denoiser_accuracy": 0.5909090909090909,
+      "position_baseline_accuracy": 0.5681818181818182
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 7,
+      "reverse_steps": 1,
+      "masked_tokens": 165,
+      "denoiser_accuracy": 0.6060606060606061,
+      "position_baseline_accuracy": 0.5636363636363636
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 7,
+      "reverse_steps": 2,
+      "masked_tokens": 165,
+      "denoiser_accuracy": 0.5878787878787879,
+      "position_baseline_accuracy": 0.5636363636363636
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 7,
+      "reverse_steps": 4,
+      "masked_tokens": 165,
+      "denoiser_accuracy": 0.593939393939394,
+      "position_baseline_accuracy": 0.5636363636363636
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 7,
+      "reverse_steps": 8,
+      "masked_tokens": 165,
+      "denoiser_accuracy": 0.593939393939394,
+      "position_baseline_accuracy": 0.5636363636363636
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 17,
+      "reverse_steps": 1,
+      "masked_tokens": 162,
+      "denoiser_accuracy": 0.5987654320987654,
+      "position_baseline_accuracy": 0.5802469135802469
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 17,
+      "reverse_steps": 2,
+      "masked_tokens": 162,
+      "denoiser_accuracy": 0.6172839506172839,
+      "position_baseline_accuracy": 0.5802469135802469
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 17,
+      "reverse_steps": 4,
+      "masked_tokens": 162,
+      "denoiser_accuracy": 0.6172839506172839,
+      "position_baseline_accuracy": 0.5802469135802469
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 17,
+      "reverse_steps": 8,
+      "masked_tokens": 162,
+      "denoiser_accuracy": 0.6172839506172839,
+      "position_baseline_accuracy": 0.5802469135802469
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 27,
+      "reverse_steps": 1,
+      "masked_tokens": 163,
+      "denoiser_accuracy": 0.5705521472392638,
+      "position_baseline_accuracy": 0.5337423312883436
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 27,
+      "reverse_steps": 2,
+      "masked_tokens": 163,
+      "denoiser_accuracy": 0.6073619631901841,
+      "position_baseline_accuracy": 0.5337423312883436
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 27,
+      "reverse_steps": 4,
+      "masked_tokens": 163,
+      "denoiser_accuracy": 0.6134969325153374,
+      "position_baseline_accuracy": 0.5337423312883436
+    },
+    {
+      "mask_ratio": 0.75,
+      "seed": 27,
+      "reverse_steps": 8,
+      "masked_tokens": 163,
+      "denoiser_accuracy": 0.6134969325153374,
+      "position_baseline_accuracy": 0.5337423312883436
+    }
+  ],
+  "note": "Paired masks and held-out sequences. The position-frequency baseline is trained only on the training split."
+}

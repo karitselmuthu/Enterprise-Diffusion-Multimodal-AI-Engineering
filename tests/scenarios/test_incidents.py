@@ -15,7 +15,8 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(summary["task_completion_rate"], 1.0)
         self.assertEqual(summary["expected_failure_rejection_rate"], 1.0)
         historical = next(row for row in report["scenarios"] if row["scenario"] == "historical_fire")
-        self.assertFalse(historical["severity_correct"])
+        self.assertTrue(historical["severity_correct"])
+        self.assertGreaterEqual(len(scenarios()), 38)
 
 
 if __name__ == "__main__":

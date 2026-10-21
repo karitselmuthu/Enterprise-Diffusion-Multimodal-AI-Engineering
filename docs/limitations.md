@@ -8,8 +8,8 @@
 - PDF extraction reads embedded text. Scanned PDFs need OCR; OCR quality varies by layout and image quality.
 - Keyword-based severity can miss synonyms, context and long reports. It is a triage experiment, not an operational incident decision. A visible red tile alone never raises severity.
 - Automated grounding checks verify evidence links and cited incident terms. They do not fully verify claims from a real VLM.
-- The 26 manually curated scenarios are synthetic and have not been independently labeled by domain experts. Historical incidents can still trigger an active severity label.
-- The review API uses one shared secret and SQLite. It records a reviewer identifier but does not authenticate individual identities, encrypt records at rest, or offer production retention and access policies.
-- `tracemalloc` reports Python allocations; it does not include all native library, model, GPU or process memory. Timing is a small local sample, not a service-level latency guarantee.
+- The 38 manually curated scenarios are synthetic and have not been independently labeled by domain experts. The new clause-level timeline heuristic handles the supplied historical, resolved and recurrence examples, but it is not a general temporal reasoner.
+- Review decisions require a reviewer-specific static key, but key possession is not strong identity assurance. SQLite records are not encrypted at rest and there are no production retention or access policies.
+- `tracemalloc` reports Python allocations; the reliability lab adds OS process RSS snapshots but does not capture native or GPU memory peaks per request. Timing is a small local sample, not a service-level latency guarantee. A client timeout does not cancel server computation.
 
 The proposed later dataset targets are 1,000 short texts, 5,000 masked training examples, 100 incident descriptions, 50 screenshots, 30 diagrams, 50 documents and 100 scenarios. Expand only after the small fixture pipeline and evaluation rules are stable. Add representative human-labeled cases and separate train/test sources before interpreting quality scores as general performance.

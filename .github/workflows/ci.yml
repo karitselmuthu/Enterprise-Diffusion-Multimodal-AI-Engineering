@@ -13,9 +13,11 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest -q
       - run: python -m cli.main benchmark --output reports/lecture_08.json
+      - run: python experiments/lecture_08/07_masked_baseline_sweep.py
       - run: python experiments/lecture_09/05_benchmark.py
+      - run: python scripts/reliability_lab.py
       - run: docker build -t enterprise-diffusion-multimodal-ai .
-      - run: docker run --rm -d --name enterprise-ai-ci -e REVIEW_API_KEY=ci-test-key enterprise-diffusion-multimodal-ai
+      - run: docker run --rm -d --name enterprise-ai-ci -e REVIEW_API_KEY=ci-test-key -e 'REVIEWER_KEYS_JSON={"container-smoke":"ci-reviewer-key"}' -e REVIEWER_SMOKE_KEY=ci-reviewer-key enterprise-diffusion-multimodal-ai
       - run: docker exec enterprise-ai-ci python scripts/container_smoke.py
       - if: always()
         run: docker stop enterprise-ai-ci || true

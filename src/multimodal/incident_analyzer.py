@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import re
-
 from .document_parser import extract_document
 from .image_processor import load_image, summarize_image
 from .vision_encoder import cosine_similarity, encode_image, encode_text
 from .vlm_backend import get_backend
+from .temporal import active_terms
 
 HIGH_TERMS = {"fire", "smoke", "explosion", "injury", "hazardous", "critical"}
 MEDIUM_TERMS = {"leak", "alarm", "failure", "overheat", "pressure"}
@@ -30,11 +29,7 @@ def analyze_incident(*, text: str, image_bytes: bytes | None = None, document_by
         if document["text"].strip():
             evidence.append({"source": "document_text", "content": document["text"].strip()[:1000], "method": document["method"]})
     combined = " ".join(item["content"] for item in evidence if item["source"] in {"report_text", "document_text"})
-    normalized = combined.lower()
-    # A small local negation window prevents "no smoke" from triggering high.
-    normalized = re.sub(r"\b(?:no|without|denies)\s+(?:\w+\s+){0,2}(?:fire|smoke|explosion|injury|hazardous|critical|leak|alarm|failure|overheat|pressure)\b", "", normalized)
-    normalized = re.sub(r"\b(?:fire|smoke|explosion|injury|hazardous|critical|leak|alarm|failure|overheat|pressure)\b\s+(?:is|was|has been)\s+(?:now\s+)?(?:normal|resolved|fixed|cleared|a false positive)\b", "", normalized)
-    terms = set(re.findall(r"[a-z]+", normalized))
+    terms, temporal_state = active_terms(combined)
     matched_high = sorted(HIGH_TERMS & terms)
     matched_medium = sorted(MEDIUM_TERMS & terms)
     severity = "high" if matched_high else "medium" if matched_medium else "undetermined"
@@ -62,6 +57,6 @@ def analyze_incident(*, text: str, image_bytes: bytes | None = None, document_by
     if backend == "local" and vlm and vlm["answer"]:
         findings.append({"claim": f"Unverified model observation: {vlm['answer'][:300]}",
                          "sources": ["vlm_output"], "verification": "requires_human_review"})
-    return {"severity": severity, "findings": findings, "evidence": evidence, "document": document,
+    return {"severity": severity, "temporal_state": temporal_state, "findings": findings, "evidence": evidence, "document": document,
             "image_text_color_similarity": similarity, "vlm": vlm,
             "limitations": ["Severity is a keyword triage signal, not a safety decision.", "Mock VLM reports pixel statistics only." if backend == "mock" else "Local VLM text may be inaccurate; verify against source image."]}

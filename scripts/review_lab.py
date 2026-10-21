@@ -45,7 +45,10 @@ def main() -> None:
     summary = input("Verified summary or rejection reason: ").strip()
     recommendation = input("Recommendation (required for approval): ").strip()
     cited = [value.strip() for value in input("Cited source IDs (comma separated): ").split(",") if value.strip()]
-    outcome = request(base + "/" + record["id"] + "/decision", key,
+    reviewer_key = os.environ.get("REVIEWER_KEY")
+    if not reviewer_key:
+        raise SystemExit("Set REVIEWER_KEY to the key assigned to the reviewer")
+    outcome = request(base + "/" + record["id"] + "/decision", reviewer_key,
                       {"status": status, "reviewer": reviewer, "summary": summary,
                        "recommendation": recommendation, "cited_sources": cited})
     print(json.dumps({"id": outcome["id"], "status": outcome["status"], "decision": outcome["decision"]}, indent=2))
