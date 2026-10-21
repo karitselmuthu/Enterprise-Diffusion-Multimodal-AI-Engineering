@@ -1,0 +1,45 @@
+{
+  "model": "smolvlm-256m-instruct",
+  "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+  "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+  "cases": [
+    {
+      "image": "smoke_dashboard.png",
+      "expected_visible_word": "smoke",
+      "model_answer": "This is a badge that shows you when you smoke detected.",
+      "word_present": true,
+      "severity": "undetermined",
+      "human_review_required": true,
+      "latency_ms": 104968.00845899998
+    },
+    {
+      "image": "pressure_dashboard.png",
+      "expected_visible_word": "pressure",
+      "model_answer": "Page 1 of 1.",
+      "word_present": false,
+      "severity": "undetermined",
+      "human_review_required": true,
+      "latency_ms": 105584.20795799975
+    },
+    {
+      "image": "normal_dashboard.png",
+      "expected_visible_word": "normal",
+      "model_answer": "Page shows system normal with a gauge of 62 psi and no active alarms.",
+      "word_present": true,
+      "severity": "undetermined",
+      "human_review_required": true,
+      "latency_ms": 108549.77554200013
+    },
+    {
+      "image": "network_dashboard.png",
+      "expected_visible_word": "failure",
+      "model_answer": "Result = Link Failure Switch 12 Port 8 down.",
+      "word_present": true,
+      "severity": "undetermined",
+      "human_review_required": true,
+      "latency_ms": 106414.98579099971
+    }
+  ],
+  "visible_word_recall": 0.75,
+  "note": "Visible-word recall is a narrow synthetic OCR proxy. Generated observations remain unverified."
+}

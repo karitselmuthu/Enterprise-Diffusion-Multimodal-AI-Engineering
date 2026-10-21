@@ -41,7 +41,8 @@ def load_image(data: bytes, *, max_pixels: int = 4_000_000) -> RGBImage:
             if not 0 < image.width * image.height <= max_pixels:
                 raise ValueError("invalid or oversized image")
             rgb = image.convert("RGB")
-            return RGBImage(rgb.width, rgb.height, list(rgb.getdata()))
+            pixels = rgb.get_flattened_data() if hasattr(rgb, "get_flattened_data") else rgb.getdata()
+            return RGBImage(rgb.width, rgb.height, list(pixels))
     except (UnidentifiedImageError, OSError) as exc:
         raise ValueError("unsupported or corrupt image") from exc
 

@@ -7,4 +7,3 @@ class IncidentRequest(BaseModel):
     document_base64: str | None = None
     document_name: str | None = None
     backend: str = "mock"
-    model_path: str | None = None

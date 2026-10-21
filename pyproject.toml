@@ -13,7 +13,7 @@ dependencies = []
 api = ["fastapi>=0.110", "uvicorn>=0.27", "python-multipart>=0.0.9"]
 vision = ["Pillow>=10", "pypdf>=4"]
 ocr = ["pytesseract>=0.3.10"]
-local-vlm = ["transformers>=4.45", "torch>=2.3", "Pillow>=10"]
+local-vlm = ["transformers>=4.45", "torch>=2.3", "Pillow>=10", "huggingface-hub>=0.25"]
 dev = ["pytest>=8", "httpx>=0.27"]
 
 [tool.setuptools.packages.find]

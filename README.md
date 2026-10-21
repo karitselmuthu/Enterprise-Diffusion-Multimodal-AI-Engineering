@@ -58,7 +58,20 @@ Run `python experiments/lecture_09/01_image_embeddings.py` through `05_benchmark
 
 For actual local VLM inference, install `.[local-vlm]`, place a compatible image-text-to-text model in a local directory, and run `python experiments/lecture_09/02_vision_language.py --model-path /path/to/model`. The local model is optional and is not downloaded by the application. The default mock reports pixel statistics and does not identify objects or hazards.
 
-`POST /multimodal/analyze` accepts JSON with `text`, optional base64 `image_base64`, optional base64 `document_base64` plus `document_name`, and optional `backend`/`model_path`. Example:
+The reproducible small-model lab downloads the [SmolVLM-256M-Instruct](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct) snapshot to a Git-ignored directory, then probes four dashboard screenshots:
+
+```bash
+.venv/bin/python -m pip install '.[local-vlm]'
+.venv/bin/python scripts/prepare_local_model.py
+.venv/bin/python experiments/lecture_09/06_real_vlm_benchmark.py \
+  --model-path data/models/smolvlm-256m-instruct
+```
+
+The 26-case synthetic incident dataset is in `data/evaluation/incidents.jsonl`. The default benchmark records each mismatch and evaluates source extraction, evidence links, error handling, and input-size performance. Model descriptions are kept as **unverified observations**; they do not set incident severity automatically.
+
+On the verified CPU lab run, the optional model recognized the target status word in 3 of 4 synthetic dashboards and took about 105–109 seconds per image. See the [VLM report](reports/lecture_09_vlm.json). It is too slow for a responsive API on this machine without a faster runtime or smaller workload.
+
+`POST /multimodal/analyze` accepts JSON with `text`, optional base64 `image_base64`, optional base64 `document_base64` plus `document_name`, and optional `backend`. For `backend: "local"`, set `LOCAL_VLM_MODEL_PATH` on the server. Example:
 
 ```bash
 curl -X POST http://127.0.0.1:8000/multimodal/analyze \
@@ -67,3 +80,9 @@ curl -X POST http://127.0.0.1:8000/multimodal/analyze \
 ```
 
 The scenario report measures severity accuracy, extraction success, evidence grounding, unsupported claims, task completion, latency, and Python traced memory. See [Lecture 9 notes](docs/lecture_09.md), the generated [report](reports/lecture_09.json), and [limitations](docs/limitations.md).
+
+### Human review
+
+Set `REVIEW_API_KEY` before starting the API to enable the review queue. `POST /reviews` analyzes and stores a pending incident, `GET /reviews` lists the queue, and `POST /reviews/{id}/decision` records one approved or rejected decision. Approval requires a reviewer summary, recommendation, and cited evidence source. The [review lab](scripts/review_lab.py) offers an interactive terminal workflow using the same API key. Review records are stored in `data/reviews.sqlite3`; set `REVIEW_DB_PATH` to change the location. Mount that path as a volume when using Docker. The shared key is a lab control, not individual user authentication.
+
+See the [review workflow](docs/review_workflow.md) for an example decision and the limits of this lab control.

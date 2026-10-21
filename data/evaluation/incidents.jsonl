@@ -1,0 +1,26 @@
+{"id":"smoke_server","report":"Smoke near server rack four.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"fire_ups","report":"Fire reported at the UPS cabinet.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"injury_motor","report":"Operator injury beside the motor.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"critical_temp","report":"Critical temperature warning on rack three.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"explosion_report","report":"An explosion was reported in the power room.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"hazardous_gas","report":"Hazardous gas reported near the loading bay.","expected_severity":"high","expected_sources":["report_text"],"category":"hazard"}
+{"id":"pressure_alarm","report":"Pressure alarm at pump two.","expected_severity":"medium","expected_sources":["report_text"],"category":"equipment"}
+{"id":"valve_leak","report":"Valve leak in west zone.","expected_severity":"medium","expected_sources":["report_text"],"category":"equipment"}
+{"id":"motor_failure","report":"Motor failure during startup.","expected_severity":"medium","expected_sources":["report_text"],"category":"equipment"}
+{"id":"pump_overheat","report":"Pump overheat detected during test.","expected_severity":"medium","expected_sources":["report_text"],"category":"equipment"}
+{"id":"alarm_active","report":"Alarm active on switch twelve.","expected_severity":"medium","expected_sources":["report_text"],"category":"equipment"}
+{"id":"no_smoke","report":"No smoke observed in the server room.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"negation"}
+{"id":"no_fire_or_smoke","report":"No fire or smoke observed after inspection.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"negation"}
+{"id":"normal_pressure","report":"Pressure is normal and no alarm is active.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"negation"}
+{"id":"resolved_leak","report":"Maintenance confirms the leak was fixed and no current alarm remains.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"resolved"}
+{"id":"false_alarm","report":"The alarm was a false positive; system stable.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"resolved"}
+{"id":"historical_fire","report":"Historical fire incident closed last month; current system normal.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"historical"}
+{"id":"routine","report":"Routine health check complete.","expected_severity":"undetermined","expected_sources":["report_text"],"category":"normal"}
+{"id":"normal_image","report":"","image":"normal_dashboard.png","expected_severity":"undetermined","expected_sources":["image_pixels"],"category":"visual_only"}
+{"id":"smoke_image","report":"","image":"smoke_dashboard.png","expected_severity":"undetermined","expected_sources":["image_pixels"],"category":"visual_only"}
+{"id":"pressure_image","report":"","image":"pressure_dashboard.png","expected_severity":"undetermined","expected_sources":["image_pixels"],"category":"visual_only"}
+{"id":"pressure_visual_conflict","report":"Pressure alarm active at pump two.","image":"normal_dashboard.png","expected_severity":"medium","expected_sources":["report_text","image_pixels"],"category":"conflict"}
+{"id":"smoke_visual_conflict","report":"Smoke reported in server room four.","image":"normal_dashboard.png","expected_severity":"high","expected_sources":["report_text","image_pixels"],"category":"conflict"}
+{"id":"pdf_leak","report":"Operator inspection pending.","document":"valve_report.pdf","expected_severity":"medium","expected_sources":["report_text","document_text"],"category":"document"}
+{"id":"text_document","report":"Operator check.","document":"../samples/incident_note.txt","expected_severity":"medium","expected_sources":["report_text","document_text"],"category":"document"}
+{"id":"network_dashboard","report":"","image":"network_dashboard.png","expected_severity":"undetermined","expected_sources":["image_pixels"],"category":"visual_only"}

@@ -1,6 +1,9 @@
 import unittest
 import base64
 from pathlib import Path
+import os
+import tempfile
+from unittest.mock import patch
 
 
 class ApiTests(unittest.TestCase):
@@ -27,6 +30,28 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.json()["vlm"]["grounding"], "pixel_statistics_only")
         invalid = self.client.post("/multimodal/analyze", json={"image_base64": "%%%"})
         self.assertEqual(invalid.status_code, 422)
+
+    def test_review_auth_persistence_and_single_decision(self):
+        with patch.dict(os.environ, {"REVIEW_API_KEY": ""}):
+            self.assertEqual(self.client.get("/reviews").status_code, 503)
+        with tempfile.TemporaryDirectory() as folder, patch.dict(os.environ, {"REVIEW_API_KEY": "test-key", "REVIEW_DB_PATH": str(Path(folder) / "reviews.sqlite3")}):
+            self.assertEqual(self.client.get("/reviews").status_code, 401)
+            headers = {"X-Review-Key": "test-key"}
+            created = self.client.post("/reviews", json={"text": "Smoke in server room"}, headers=headers)
+            self.assertEqual(created.status_code, 201)
+            record = created.json()
+            self.assertEqual(record["status"], "pending")
+            self.assertEqual(len(self.client.get("/reviews", headers=headers).json()), 1)
+            invalid = self.client.post(f"/reviews/{record['id']}/decision", headers=headers,
+                                       json={"status": "approved", "reviewer": "analyst", "summary": "Smoke reported",
+                                             "recommendation": "Inspect", "cited_sources": ["unknown"]})
+            self.assertEqual(invalid.status_code, 422)
+            decision = {"status": "approved", "reviewer": "analyst", "summary": "Smoke reported",
+                        "recommendation": "Inspect the room", "cited_sources": ["report_text"]}
+            approved = self.client.post(f"/reviews/{record['id']}/decision", headers=headers, json=decision)
+            self.assertEqual(approved.status_code, 200)
+            self.assertEqual(approved.json()["status"], "approved")
+            self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=headers, json=decision).status_code, 409)
 
 
 if __name__ == "__main__":

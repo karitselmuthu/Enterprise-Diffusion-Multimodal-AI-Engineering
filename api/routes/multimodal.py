@@ -30,7 +30,6 @@ def analyze(request: IncidentRequest) -> dict:
     try:
         return analyze_incident(text=request.text, image_bytes=decode_payload(request.image_base64),
                                 document_bytes=decode_payload(request.document_base64),
-                                document_name=request.document_name, backend=request.backend,
-                                model_path=request.model_path)
+                                document_name=request.document_name, backend=request.backend)
     except (ValueError, RuntimeError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
