@@ -20,6 +20,8 @@ An enterprise-oriented AI engineering platform exploring diffusion language mode
   Traditional text-only LLM workflows have limitations when important information is contained in visual content. 
   Meanwhile, diffusion-based language modeling offers a different approach to generating and refining text compared with conventional left-to-right autoregressive decoding.
 
+![Proposed solution flow from enterprise incident inputs through Lecture 8 and Lecture 9 to evaluation and human-reviewed incident intelligence](docs/assets/proposed_solution.png)
+
 ## Running the application
 
 Run these commands from the repository root with Python 3.11 or newer:
