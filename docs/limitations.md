@@ -5,6 +5,7 @@
 - The default image embedding captures RGB means only. Image color similarity is not semantic similarity; it cannot read dashboard labels or diagrams.
 - The default VLM is a pixel-statistics mock. Real local inference requires a compatible cached model, PyTorch and Transformers. The model is outside default CI; the optional four-image benchmark is a narrow visual-text probe, not broad validation.
 - The measured local model missed a large `PRESSURE HIGH` label in one of four synthetic dashboards and took about 105–109 seconds per image on this CPU-only host. It is not suitable for interactive incident triage here without a faster runtime and more evaluation.
+- On a separate 20-image selected benchmark, exact status text appeared in 4/20 answers and exact numeric readings in 6/20. Combined field accuracy was 10/40 (25%), below the 90% acceptance threshold; mean latency was 122.8 seconds per image. The matching rule allows extra output text, so this score is not a claim-support measure.
 - PDF extraction reads embedded text. Scanned PDFs need OCR; OCR quality varies by layout and image quality.
 - Keyword-based severity can miss synonyms, context and long reports. It is a triage experiment, not an operational incident decision. A visible red tile alone never raises severity.
 - Automated grounding checks verify evidence links and cited incident terms. They do not fully verify claims from a real VLM.

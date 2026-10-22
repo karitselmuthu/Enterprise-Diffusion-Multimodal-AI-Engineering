@@ -51,6 +51,8 @@ class ApiTests(unittest.TestCase):
                         "recommendation": "Inspect the room", "cited_sources": ["report_text"]}
             with patch.dict(os.environ, {"REVIEWER_KEYS_JSON": ""}):
                 self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json=decision).status_code, 503)
+            with patch.dict(os.environ, {"REVIEWER_KEYS_JSON": '{"analyst":"test-key"}'}):
+                self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json=decision).status_code, 503)
             self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers={**headers, "X-Reviewer-Key": "wrong"}, json=decision).status_code, 401)
             self.assertEqual(self.client.post(f"/reviews/{record['id']}/decision", headers=reviewer_headers, json={**decision, "reviewer": "someone-else"}).status_code, 403)
             self.assertEqual(self.client.post("/reviews/not-a-valid-id/decision", headers=reviewer_headers, json=decision).status_code, 404)

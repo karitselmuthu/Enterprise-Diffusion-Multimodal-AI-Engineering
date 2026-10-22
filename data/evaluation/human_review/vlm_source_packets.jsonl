@@ -1,0 +1,20 @@
+{"case_id": "7420ed02efea", "image": "data/evaluation/dashboard_matrix/dashboard_0_0.png", "generated_claim": "PUMP 2"}
+{"case_id": "e6f46af6836d", "image": "data/evaluation/dashboard_matrix/dashboard_0_1.png", "generated_claim": "System Normal Boot."}
+{"case_id": "36f6a27ce9dd", "image": "data/evaluation/dashboard_matrix/dashboard_0_2.png", "generated_claim": "Network Core."}
+{"case_id": "5300e0e17f4b", "image": "data/evaluation/dashboard_matrix/dashboard_0_3.png", "generated_claim": "'8 pm'."}
+{"case_id": "bd7b448c0523", "image": "data/evaluation/dashboard_matrix/dashboard_1_0.png", "generated_claim": "114 psi"}
+{"case_id": "4b5a8aff3c94", "image": "data/evaluation/dashboard_matrix/dashboard_1_1.png", "generated_claim": "62 psi"}
+{"case_id": "4faf92c78a1e", "image": "data/evaluation/dashboard_matrix/dashboard_1_2.png", "generated_claim": "Link Failure 0 Mbps"}
+{"case_id": "df71535c02b7", "image": "data/evaluation/dashboard_matrix/dashboard_1_3.png", "generated_claim": "8 pm"}
+{"case_id": "01a9c3e5acfb", "image": "data/evaluation/dashboard_matrix/dashboard_2_0.png", "generated_claim": "ALERTS | SERVICE STATUS."}
+{"case_id": "a88eb4886156", "image": "data/evaluation/dashboard_matrix/dashboard_2_1.png", "generated_claim": "SERVICE STATUS"}
+{"case_id": "24259c907c6e", "image": "data/evaluation/dashboard_matrix/dashboard_2_2.png", "generated_claim": "SERVICE STATUS"}
+{"case_id": "91b797585e4b", "image": "data/evaluation/dashboard_matrix/dashboard_2_3.png", "generated_claim": "SERVICE STATUS."}
+{"case_id": "0b8ad8dc89ba", "image": "data/evaluation/dashboard_matrix/dashboard_3_0.png", "generated_claim": "ALERTS | SERVICE STATUS"}
+{"case_id": "f65fc159f331", "image": "data/evaluation/dashboard_matrix/dashboard_3_1.png", "generated_claim": "PUPP 2 62 psi"}
+{"case_id": "c018af223b1b", "image": "data/evaluation/dashboard_matrix/dashboard_3_2.png", "generated_claim": "ALERT | SERVICE STATUS"}
+{"case_id": "89441dc8ea9e", "image": "data/evaluation/dashboard_matrix/dashboard_3_3.png", "generated_claim": "SERVER ROOM 4 8 pm"}
+{"case_id": "5e87514e2c67", "image": "data/evaluation/dashboard_matrix/dashboard_4_0.png", "generated_claim": "{'header': ['Pump 2', '114 psi'], 'rows': [['', '11"}
+{"case_id": "d55ffbd4c992", "image": "data/evaluation/dashboard_matrix/dashboard_4_1.png", "generated_claim": "System Normal then 62 psi."}
+{"case_id": "96d930345295", "image": "data/evaluation/dashboard_matrix/dashboard_4_2.png", "generated_claim": "Link Failure"}
+{"case_id": "5e0a1e79f9c4", "image": "data/evaluation/dashboard_matrix/dashboard_4_3.png", "generated_claim": "Server Room 4."}

@@ -28,9 +28,11 @@ def main() -> None:
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
         port = sock.getsockname()[1]
+    review_db = Path(tempfile.gettempdir()) / f"reliability_lab_reviews_{os.getpid()}.sqlite3"
     process = subprocess.Popen([sys.executable, "-m", "uvicorn", "api.main:app", "--host", "127.0.0.1", "--port", str(port)],
                                cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                               env={**os.environ, "REVIEW_DB_PATH": str(Path(tempfile.gettempdir()) / "reliability_lab_reviews.sqlite3")})
+                               env={**os.environ, "REVIEW_DB_PATH": str(review_db), "REVIEW_API_KEY": "lab-queue-key",
+                                    "REVIEWER_KEYS_JSON": '{"lab-reviewer":"lab-decision-key"}'})
     base = f"http://127.0.0.1:{port}"
     try:
         for _ in range(100):
@@ -67,13 +69,28 @@ def main() -> None:
         except httpx.TimeoutException:
             timeout_observed = True
         recovery = request(payloads[0])
+        queue_headers = {"X-Review-Key": "lab-queue-key"}
+        decision_headers = {**queue_headers, "X-Reviewer-Key": "lab-decision-key"}
+        created = httpx.post(base + "/reviews", json={"text": "Smoke active in rack room"}, headers=queue_headers, timeout=30)
+        assert created.status_code == 201
+        review_id = created.json()["id"]
+        decision = {"status": "approved", "reviewer": "lab-reviewer", "summary": "Smoke is reported",
+                    "recommendation": "Inspect rack room", "cited_sources": ["report_text"]}
+        decision_url = base + f"/reviews/{review_id}/decision"
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            decisions = list(executor.map(lambda _: httpx.post(decision_url, json=decision,
+                                                               headers=decision_headers, timeout=30).status_code, range(4)))
+        final_review = httpx.get(base + f"/reviews/{review_id}", headers=queue_headers, timeout=30).json()
         rss_after = rss_bytes(process.pid)
         assert all(row["status"] == 200 for row in repeated + concurrent + [larger, recovery])
         assert malformed["status"] == 422 and oversized["status"] == 422, (malformed, oversized)
         assert timeout_observed
+        assert sorted(decisions) == [200, 409, 409, 409]
+        assert final_review["status"] == "approved" and final_review["decision"]["reviewer"] == "lab-reviewer"
         report = {"repeated": repeated, "concurrent": concurrent, "larger": larger,
                   "oversized": oversized, "malformed": malformed, "client_timeout_observed": timeout_observed,
                   "recovery": recovery,
+                  "simultaneous_review_decisions": decisions, "final_review_status": final_review["status"],
                   "image_sizes": [[int(900 * scale), int(500 * scale)] for scale in (1, 2, 2.5, 3)],
                   "server_rss_before_bytes": rss_before, "server_rss_after_bytes": rss_after,
                   "note": "Mock backend only; OS RSS snapshots are process-level, not request peaks. A client timeout does not cancel server computation. VLM timeouts are not tested."}
@@ -88,6 +105,7 @@ def main() -> None:
         except subprocess.TimeoutExpired:
             process.kill()
             process.wait()
+        review_db.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

@@ -37,6 +37,8 @@ def reviewer_identity(x_reviewer_key: str | None = Header(default=None)) -> str:
         keys = json.loads(raw)
         if not isinstance(keys, dict) or not keys or any(not isinstance(name, str) or not isinstance(key, str) or not key for name, key in keys.items()):
             raise ValueError("invalid reviewer keys")
+        if len(set(keys.values())) != len(keys) or os.environ.get("REVIEW_API_KEY") in keys.values():
+            raise ValueError("reviewer keys must be distinct from each other and the queue key")
     except (ValueError, TypeError) as exc:
         raise HTTPException(status_code=503, detail="Invalid REVIEWER_KEYS_JSON") from exc
     for name, key in keys.items():

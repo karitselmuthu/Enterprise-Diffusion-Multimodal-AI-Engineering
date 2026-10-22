@@ -2,80 +2,87 @@
   "repeated": [
     {
       "status": 200,
-      "latency_ms": 337.68420799970045
+      "latency_ms": 304.00974999975006
     },
     {
       "status": 200,
-      "latency_ms": 302.39008399985323
+      "latency_ms": 247.4062090004736
     },
     {
       "status": 200,
-      "latency_ms": 305.9494999997696
+      "latency_ms": 238.79687499902502
     },
     {
       "status": 200,
-      "latency_ms": 260.61770799969963
+      "latency_ms": 243.67862500002957
     },
     {
       "status": 200,
-      "latency_ms": 253.00925000010466
+      "latency_ms": 242.02629200044612
     },
     {
       "status": 200,
-      "latency_ms": 282.80145899952913
+      "latency_ms": 253.21916599932592
     },
     {
       "status": 200,
-      "latency_ms": 263.46516699959466
+      "latency_ms": 249.6250410003995
     },
     {
       "status": 200,
-      "latency_ms": 261.2507920002827
+      "latency_ms": 271.5502910014038
     },
     {
       "status": 200,
-      "latency_ms": 331.4215000009426
+      "latency_ms": 227.07508399980725
     },
     {
       "status": 200,
-      "latency_ms": 288.04745900015405
+      "latency_ms": 223.70795800088672
     }
   ],
   "concurrent": [
     {
       "status": 200,
-      "latency_ms": 6726.537541999278
+      "latency_ms": 4843.005083999742
     },
     {
       "status": 200,
-      "latency_ms": 6904.959542000142
+      "latency_ms": 4844.814958001734
     },
     {
       "status": 200,
-      "latency_ms": 6717.184875000385
+      "latency_ms": 4872.306708000906
     },
     {
       "status": 200,
-      "latency_ms": 6713.432333999663
+      "latency_ms": 4926.231917001132
     }
   ],
   "larger": {
     "status": 200,
-    "latency_ms": 2104.606500000955
+    "latency_ms": 1494.2692080003326
   },
   "oversized": {
     "status": 422,
-    "latency_ms": 13.081875000352738
+    "latency_ms": 26.39212499889254
   },
   "malformed": {
     "status": 422,
-    "latency_ms": 9.420209000381874
+    "latency_ms": 11.250874998950167
   },
   "client_timeout_observed": true,
   "recovery": {
     "status": 200,
-    "latency_ms": 1013.8200410001446
+    "latency_ms": 930.2579579998564
   },
+  "simultaneous_review_decisions": [
+    409,
+    409,
+    200,
+    409
+  ],
+  "final_review_status": "approved",
   "image_sizes": [
     [
       900,
@@ -94,7 +101,7 @@
       1500
     ]
   ],
-  "server_rss_before_bytes": 59326464,
-  "server_rss_after_bytes": 366870528,
+  "server_rss_before_bytes": 59424768,
+  "server_rss_after_bytes": 340230144,
   "note": "Mock backend only; OS RSS snapshots are process-level, not request peaks. A client timeout does not cancel server computation. VLM timeouts are not tested."
 }

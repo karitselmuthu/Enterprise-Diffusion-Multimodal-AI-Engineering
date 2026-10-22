@@ -1,0 +1,48 @@
+{
+  "temporal_reasoning": {
+    "status": "pass",
+    "accuracy": 1.0,
+    "case_count": 15,
+    "critical_errors": [],
+    "scope": "manually curated synthetic temporal scenarios"
+  },
+  "vlm_extraction": {
+    "status": "fail",
+    "completed": 20,
+    "target_minimum": 20,
+    "exact_field_accuracy": 0.25,
+    "target_accuracy": 0.9,
+    "both_fields_exact_accuracy": 0.1,
+    "scope": "synthetic dashboard status and reading fields"
+  },
+  "diffusion_experiment": {
+    "status": "pass",
+    "settings": 36,
+    "reproduced_within_1e_12": true,
+    "denoiser_mean_accuracy": 0.613008497566952,
+    "baseline_mean_accuracy": 0.5649849412081972
+  },
+  "api_security": {
+    "status": "pass",
+    "test_command": "python -m pytest -q tests/integration/test_api.py tests/unit/test_review.py",
+    "test_output": ".....                                                                    [100%]\n5 passed in 0.39s"
+  },
+  "evidence_validation": {
+    "status": "pending",
+    "automated_unsupported_claim_count": 0,
+    "reason": "Two independent reviewers have not yet judged each generated conclusion against its source."
+  },
+  "reliability": {
+    "status": "pass",
+    "repeated_requests": 10,
+    "concurrent_requests": 4,
+    "review_decision_statuses": [
+      409,
+      409,
+      200,
+      409
+    ],
+    "final_review_status": "approved",
+    "scope": "defined mock API workload; local VLM concurrency and server-side cancellation untested"
+  }
+}

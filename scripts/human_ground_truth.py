@@ -35,7 +35,7 @@ def export(target: Path) -> None:
                                      "generated_findings": analysis["findings"]}) + "\n")
     for reviewer in ("reviewer_a", "reviewer_b"):
         with (target / f"{reviewer}.csv").open("w", newline="") as stream:
-            writer = csv.DictWriter(stream, fieldnames=FIELDS)
+            writer = csv.DictWriter(stream, fieldnames=FIELDS, lineterminator="\n")
             writer.writeheader()
             for case in cases:
                 writer.writerow({"case_id": code(case["id"])})
@@ -88,7 +88,7 @@ def export_vlm(target: Path) -> None:
                                      "generated_claim": row["answer"]}) + "\n")
     for reviewer in ("reviewer_a", "reviewer_b"):
         with (target / f"vlm_{reviewer}.csv").open("w", newline="") as stream:
-            writer = csv.DictWriter(stream, fieldnames=VLM_FIELDS)
+            writer = csv.DictWriter(stream, fieldnames=VLM_FIELDS, lineterminator="\n")
             writer.writeheader()
             for row in report["rows"]:
                 writer.writerow({"case_id": code("vlm:" + row["image"])})

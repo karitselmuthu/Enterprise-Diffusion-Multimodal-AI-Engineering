@@ -75,6 +75,8 @@ On the verified CPU lab run, the optional model recognized the target status wor
 
 `python scripts/generate_dashboard_matrix.py` creates 24 varied dashboard fixtures. `python experiments/lecture_09/07_dashboard_matrix.py --model-path data/models/smolvlm-256m-instruct` measures exact status and numeric reading extraction. `python scripts/reliability_lab.py` exercises a running mock API under repeated and concurrent requests and records server resident memory. These experiments use synthetic images; their labels do not count as independent human ground truth.
 
+The selected 20-image CPU benchmark found the full status value in 4/20 answers and the full numeric reading in 6/20, for **25% exact field accuracy** across 40 fields and 10% with both fields correct. Mean latency was about 123 seconds per image. This fails the 90% acceptance target; see the [dashboard matrix report](reports/lecture_09_dashboard_matrix.json) for each raw answer and layout group.
+
 `POST /multimodal/analyze` accepts JSON with `text`, optional base64 `image_base64`, optional base64 `document_base64` plus `document_name`, and optional `backend`. For `backend: "local"`, set `LOCAL_VLM_MODEL_PATH` on the server. Example:
 
 ```bash
@@ -91,6 +93,10 @@ Set `REVIEW_API_KEY` before starting the API to enable the review queue. Set `RE
 
 `python scripts/human_ground_truth.py --export /path/to/review_packets` creates source packets and two empty reviewer sheets. After two different reviewers label severity and check claim support against the original images and documents, run `python scripts/human_ground_truth.py --score reviewer_a.csv reviewer_b.csv` to measure agreement. No independent labels are supplied with this repository.
 
-After the 24-image VLM run completes, `python scripts/human_ground_truth.py --export-vlm /path/to/review_packets` prepares every model answer alongside its source image for two independent support judgments. Use `--score-vlm vlm_reviewer_a.csv vlm_reviewer_b.csv` after review.
+After the selected VLM run completes, `python scripts/human_ground_truth.py --export-vlm /path/to/review_packets` prepares every model answer alongside its source image for two independent support judgments. Use `--score-vlm vlm_reviewer_a.csv vlm_reviewer_b.csv` after review.
+
+## Acceptance checks
+
+Run `python scripts/acceptance_gate.py` after the dashboard benchmark to write [the acceptance report](reports/acceptance.json). It checks temporal accuracy against the 95% threshold, exact VLM field accuracy against 90% on at least 20 images, repeatability of the 36-setting diffusion sweep, review security tests, and the defined reliability workload. The evidence-support gate stays pending until two independent reviewers complete the source packets. A passing CI build does not imply every acceptance gate has passed.
 
 See the [review workflow](docs/review_workflow.md) for an example decision and the limits of this lab control.

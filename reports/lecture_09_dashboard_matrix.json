@@ -1,0 +1,290 @@
+{
+  "completed": 20,
+  "target": 20,
+  "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+  "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+  "prompt": "Read this dashboard. Return the exact status text and exact numeric reading with units. If unreadable, say unreadable.",
+  "local_vlm_threads": 4,
+  "image_max_side_pixels": 512,
+  "matching_rule": "Case- and punctuation-normalized complete field value must appear contiguously in the free-form answer; extra text is allowed.",
+  "status_accuracy": 0.2,
+  "reading_accuracy": 0.3,
+  "both_accuracy": 0.1,
+  "mean_latency_ms": 122833.18980220011,
+  "p95_latency_ms": 139997.85199999862,
+  "by_variant": {
+    "0": {
+      "count": 4,
+      "status_accuracy": 0.25,
+      "reading_accuracy": 0.0,
+      "both_accuracy": 0.0
+    },
+    "1": {
+      "count": 4,
+      "status_accuracy": 0.25,
+      "reading_accuracy": 0.75,
+      "both_accuracy": 0.25
+    },
+    "2": {
+      "count": 4,
+      "status_accuracy": 0.0,
+      "reading_accuracy": 0.0,
+      "both_accuracy": 0.0
+    },
+    "3": {
+      "count": 4,
+      "status_accuracy": 0.0,
+      "reading_accuracy": 0.25,
+      "both_accuracy": 0.0
+    },
+    "4": {
+      "count": 4,
+      "status_accuracy": 0.5,
+      "reading_accuracy": 0.5,
+      "both_accuracy": 0.25
+    }
+  },
+  "rows": [
+    {
+      "image": "dashboard_0_0.png",
+      "variant": 0,
+      "status": "PRESSURE HIGH",
+      "reading": "114 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "PUMP 2",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 132528.446667
+    },
+    {
+      "image": "dashboard_0_1.png",
+      "variant": 0,
+      "status": "SYSTEM NORMAL",
+      "reading": "62 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "System Normal Boot.",
+      "status_exact": true,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 141514.5783750013
+    },
+    {
+      "image": "dashboard_0_2.png",
+      "variant": 0,
+      "status": "LINK FAILURE",
+      "reading": "0 Mbps",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "Network Core.",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 132584.09279199986
+    },
+    {
+      "image": "dashboard_0_3.png",
+      "variant": 0,
+      "status": "SMOKE DETECTED",
+      "reading": "8 ppm",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "'8 pm'.",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 139997.85199999862
+    },
+    {
+      "image": "dashboard_1_0.png",
+      "variant": 1,
+      "status": "PRESSURE HIGH",
+      "reading": "114 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "114 psi",
+      "status_exact": false,
+      "reading_exact": true,
+      "both_exact": false,
+      "latency_ms": 135672.38458400063
+    },
+    {
+      "image": "dashboard_1_1.png",
+      "variant": 1,
+      "status": "SYSTEM NORMAL",
+      "reading": "62 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "62 psi",
+      "status_exact": false,
+      "reading_exact": true,
+      "both_exact": false,
+      "latency_ms": 129227.22841699942
+    },
+    {
+      "image": "dashboard_1_2.png",
+      "variant": 1,
+      "status": "LINK FAILURE",
+      "reading": "0 Mbps",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "Link Failure 0 Mbps",
+      "status_exact": true,
+      "reading_exact": true,
+      "both_exact": true,
+      "latency_ms": 133411.15987500054
+    },
+    {
+      "image": "dashboard_1_3.png",
+      "variant": 1,
+      "status": "SMOKE DETECTED",
+      "reading": "8 ppm",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "8 pm",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 133141.4783750006
+    },
+    {
+      "image": "dashboard_2_0.png",
+      "variant": 2,
+      "status": "PRESSURE HIGH",
+      "reading": "114 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "ALERTS | SERVICE STATUS.",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 123857.97170899968
+    },
+    {
+      "image": "dashboard_2_1.png",
+      "variant": 2,
+      "status": "SYSTEM NORMAL",
+      "reading": "62 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "SERVICE STATUS",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 132968.82216699852
+    },
+    {
+      "image": "dashboard_2_2.png",
+      "variant": 2,
+      "status": "LINK FAILURE",
+      "reading": "0 Mbps",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "SERVICE STATUS",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 133635.92920799967
+    },
+    {
+      "image": "dashboard_2_3.png",
+      "variant": 2,
+      "status": "SMOKE DETECTED",
+      "reading": "8 ppm",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "SERVICE STATUS.",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 126886.40400000077
+    },
+    {
+      "image": "dashboard_3_0.png",
+      "variant": 3,
+      "status": "PRESSURE HIGH",
+      "reading": "114 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "ALERTS | SERVICE STATUS",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 114329.38487499996
+    },
+    {
+      "image": "dashboard_3_1.png",
+      "variant": 3,
+      "status": "SYSTEM NORMAL",
+      "reading": "62 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "PUPP 2 62 psi",
+      "status_exact": false,
+      "reading_exact": true,
+      "both_exact": false,
+      "latency_ms": 116045.47437499969
+    },
+    {
+      "image": "dashboard_3_2.png",
+      "variant": 3,
+      "status": "LINK FAILURE",
+      "reading": "0 Mbps",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "ALERT | SERVICE STATUS",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 110666.52254200017
+    },
+    {
+      "image": "dashboard_3_3.png",
+      "variant": 3,
+      "status": "SMOKE DETECTED",
+      "reading": "8 ppm",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "SERVER ROOM 4 8 pm",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 104337.72512500036
+    },
+    {
+      "image": "dashboard_4_0.png",
+      "variant": 4,
+      "status": "PRESSURE HIGH",
+      "reading": "114 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "{'header': ['Pump 2', '114 psi'], 'rows': [['', '11",
+      "status_exact": false,
+      "reading_exact": true,
+      "both_exact": false,
+      "latency_ms": 103231.47258300014
+    },
+    {
+      "image": "dashboard_4_1.png",
+      "variant": 4,
+      "status": "SYSTEM NORMAL",
+      "reading": "62 psi",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "System Normal then 62 psi.",
+      "status_exact": true,
+      "reading_exact": true,
+      "both_exact": true,
+      "latency_ms": 103643.74404200134
+    },
+    {
+      "image": "dashboard_4_2.png",
+      "variant": 4,
+      "status": "LINK FAILURE",
+      "reading": "0 Mbps",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "Link Failure",
+      "status_exact": true,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 104906.65666600034
+    },
+    {
+      "image": "dashboard_4_3.png",
+      "variant": 4,
+      "status": "SMOKE DETECTED",
+      "reading": "8 ppm",
+      "ground_truth_origin": "rendered synthetic text",
+      "answer": "Server Room 4.",
+      "status_exact": false,
+      "reading_exact": false,
+      "both_exact": false,
+      "latency_ms": 104076.46766700054
+    }
+  ],
+  "ground_truth_origin": "programmatically rendered synthetic labels; no independent human validation"
+}
